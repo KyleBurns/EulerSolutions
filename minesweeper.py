@@ -36,13 +36,13 @@ def checkNearby(coord,grid,mines):
     return [count,coordList]
 
 
-def doShit(cord,grid,mineList):
+def doStuff(cord,grid,mineList):
     near = checkNearby(cord,grid,mineList)
     if cord in grid:
         grid.remove(cord)
     if near[0] == 0:
         for n in range(len(near[1])):
-            doShit(near[1][n],grid,mineList)
+            doStuff(near[1][n],grid,mineList)
 
 formatgrid = [[" "," "," "," "," "," "," "," "," "],[" "," "," "," "," "," "," "," "," "],[" "," "," "," "," "," "," "," "," "],[" "," "," "," "," "," "," "," "," "],[" "," "," "," "," "," "," "," "," "],[" "," "," "," "," "," "," "," "," "],[" "," "," "," "," "," "," "," "," "],[" "," "," "," "," "," "," "," "," "],[" "," "," "," "," "," "," "," "," "]]
 grid = genGrid(9,9)
@@ -56,7 +56,7 @@ firstClick = list(input("Enter a co-ordinate on the grid. "))
 firstClick[0] -= 1
 firstClick[1] -= 1
 mineList = genMines(20,firstClick)
-doShit(firstClick,grid,mineList)
+doStuff(firstClick,grid,mineList)
 if grid == mineList:
      print "You win!"
      loss = True
@@ -81,7 +81,7 @@ while loss == False:
             print "BOOM! Game over."
             loss = True
         else:
-            doShit(userInput,grid,mineList)   
+            doStuff(userInput,grid,mineList)   
     else:
         print "Co-ordinate not found in grid."
     if grid == mineList:
